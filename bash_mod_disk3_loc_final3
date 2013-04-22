@@ -1,0 +1,48 @@
+#!/bin/bash
+# 
+# Bash script for generating flow fields for 7 different positions of back tile
+#  I) Need to modify:1) system/topoSetDict (location P1,P2 for actuationDisk3)
+#                    2) constant/sourcesProperties (location of upstreamPoint)
+# II) Need to move files generated after the execution of simpleFoam.
+# make directory case_i
+# mv log.* case_i
+# cp -r constant/polyMesh/ case_i
+# cp -r [1-5]* case_i
+# cp constant/sourcesProperties case_i
+# cp system/topoSetDic case_i
+#     
+# 
+# Initial location for center of back tile is: 108
+# Step size for new location                 : 9
+# Final location(7)                          : 162
+# 
+# 
+#### Date   : 23rd August, 2012
+#### Author : Vaibhav Bhutoria
+
+
+NUM1=108
+DIFF=9
+echo $NUM1
+for i in {1..7}
+do
+   mkdir case_3t_shear_$i
+#   ./Allclean
+#   let TEMP=(i-1)*DIFF
+   let TEMP0=(i-1)*DIFF+NUM1
+   let TEMP=(i)*DIFF+NUM1  
+   echo $TEMP0 
+   sed -e "s/267 $NUM1 108/267 $TEMP0 108/g" system/topoSetDict_orig > system/topoSetDict2
+   sed -e "s/273 $NUM1 108/273 $TEMP0 108/g" system/topoSetDict2 > system/topoSetDict
+   sed -e "s/249 $NUM1 108/249 $TEMP0 108/g" constant/sourcesProperties_orig > constant/sourcesProperties
+   ./Allrun
+   mv log.* case_3t_shear_$i
+   cp -r constant/ case_3t_shear_$i
+   mv [1-9]* case_3t_shear_$i
+   cp -r system/ case_3t_shear_$i
+   mv processor* case_3t_shear_$i
+#   rm -r processor*
+#   rm -rf [1-5]*
+ 
+#   echo "Welcome $i times"
+done

@@ -1,0 +1,59 @@
+#!/bin/bash
+# Bash script for extractign flow field from 
+# {U,p,k,epsilon} --> {U,p,k,epsilon}_dat
+#  
+
+for i in {1..7}
+do
+   ls case_3t_shear_$i
+   ls case_3t_shear_$i/500
+sed -n "23,622102p" case_3t_shear_$i/500/U > case_3t_shear_$i/500/U1
+sed -e "s/)/ /g" case_3t_shear_$i/500/U1 > case_3t_shear_$i/500/U2
+sed -e "s/(/ /g" case_3t_shear_$i/500/U2 > case_3t_shear_$i/500/U_dat
+rm -f case_3t_shear_$i/500/U1 case_3t_shear_$i/500/U2
+
+sed -n "23,622102p" case_3t_shear_$i/500/p > case_3t_shear_$i/500/p_dat
+
+sed -n "23,622102p" case_3t_shear_$i/500/k > case_3t_shear_$i/500/k_dat
+
+sed -n "23,622102p" case_3t_shear_$i/500/epsilon > case_3t_shear_$i/500/epsilon_dat
+
+mkdir case_3t_shear_$i/500/dat_files_$i
+mv case_3t_shear_$i/500/*_dat case_3t_shear_$i/500/dat_files_$i
+tar cvzf case_3t_shear_$i/500/dat_files_$i.tgz case_3t_shear_$i/500/dat_files_$i
+
+
+#   ./Allclean
+#   let TEMP=(i-1)*DIFF
+#   let TEMP0=(i-1)*DIFF+NUM1
+#   let TEMP=(i)*DIFF+NUM1
+#   echo $TEMP0 
+#   sed -e "s/$NUM1/$TEMP0/g" system/topoSetDict_orig > system/topoSetDict
+#   sed -e "s/$NUM1/$TEMP0/g" constant/sourcesProperties_orig > constant/sourcesProperties
+#   ./Allrun
+#   mv log.* case_3t_shear_$i
+#   cp -r constant/polyMesh/ case_3t_shear_$i
+#   mv [1-5]* case_3t_shear_$i
+#   cp constant/sourcesProperties case_3t_shear_$i
+#   cp system/topoSetDict case_3t_shear_$i
+#   mv processor* case_3t_shear_$i
+#   rm -r processor*
+#   rm -rf [1-5]*
+
+#   echo "Welcome $i times"
+done
+
+#sed -n "23,622102p" U > U1
+#sed -e "s/)/ /g" U1 > U2
+#sed -e "s/(/ /g" U2 > U_dat
+#rm -f U1 U2
+#
+#sed -n "23,622102p" p > p_dat
+#
+#sed -n "23,622102p" k > k_dat
+#
+#sed -n "23,622102p" epsilon > epsilon_dat
+#
+#mkdir dat_files
+#mv *_dat dat_files
+#tar cvzf dat_files.tgz dat_files

@@ -1,0 +1,99 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      sourcesProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+disk1
+{
+    type            actuationDiskSource;
+    active          on;            //on/off switch
+    timeStart       0.0;           //start time
+    duration        1000.0;        //duration
+    selectionMode   cellSet;       //cellSet // points //cellZone
+    cellSet         actuationDisk1;//cellSet name when selectionMode = cellSet
+
+    actuationDiskSourceCoeffs
+    {
+        fieldNames  (U);
+        diskDir     (1 0 0); // orientation of the disk
+        Cp          0.386;     // Cp
+        Ct          0.58;     // Ct
+        diskArea    1017.8;//706;       // disk area
+        upstreamPoint (70 54 108);//(200 187.5 187.5);//(125 75 75);//(581849 4785810 1065);
+    }
+}
+
+disk2
+{
+    type            actuationDiskSource;
+    active          on;            //on/off switch
+    timeStart       0.0;           //start time
+    duration        1000.0;        //duration
+    selectionMode   cellSet;       //cellSet // points //cellZone
+    cellSet         actuationDisk2;//cellSet name when selectionMode = cellSet
+
+    actuationDiskSourceCoeffs
+    {
+        fieldNames  (U);
+        diskDir     (1 0 0); // orientation of the disk
+        Cp          0.386;     // Cp
+        Ct          0.58;     // Ct
+        diskArea    1017.8;//706;       // disk area
+        upstreamPoint (70 162 108);//(200 187.5 187.5);//(125 75 75);//(581849 4785810 1065);
+    }
+}
+
+disk3
+{
+    type            actuationDiskSource;
+    active          on;            //on/off switch
+    timeStart       0.0;           //start time
+    duration        1000.0;        //duration
+    selectionMode   cellSet;       //cellSet // points //cellZone
+    cellSet         actuationDisk3;//cellSet name when selectionMode = cellSet
+
+    actuationDiskSourceCoeffs
+    {
+        fieldNames  (U);
+        diskDir     (1 0 0); // orientation of the disk
+        Cp          0.386;     // Cp
+        Ct          0.58;     // Ct
+        diskArea    1017.8;//706;       // disk area
+        upstreamPoint (249 108 108);//(200 187.5 187.5);//(125 75 75);//(581849 4785810 1065);
+    }
+}
+
+/*
+disk2
+{
+    type            actuationDiskSource;
+    active          on;
+    timeStart       0.0;
+    duration        1000.0;
+    selectionMode   cellSet;
+    cellSet         actuationDisk2;
+
+    actuationDiskSourceCoeffs
+    {
+        fieldNames  (U);
+        diskDir     (-1 0 0);
+        Cp          0.386;
+        Ct          0.58;
+        diskArea    40;
+        upstreamPoint (581753 4785663 1070);
+    }
+} */
+
+// ************************************************************************* //

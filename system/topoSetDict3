@@ -1,0 +1,118 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+    // actuationDisk1
+    {
+        name    actuationDisk1;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (87 54 108);//(140 75 75);
+            p2      (93 54 108);//(160 75 75);
+            radius  18;
+        }
+    }
+    {
+        name    actuationDisk1;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set actuationDisk1;
+        }
+    }
+
+    // actuationDisk2
+    {
+        name    actuationDisk2;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (87 162 108);//(140 75 75);
+            p2      (93 162 108);//(160 75 75);
+            radius  18;
+        }
+    }
+    {
+        name    actuationDisk2;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set actuationDisk2;
+        }
+    }
+
+
+    // actuationDisk3
+    {
+        name    actuationDisk3;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (231 135 108);//(140 75 75);
+            p2      (237 135 108);//(160 75 75);
+            radius  18;
+        }
+    }
+    {
+        name    actuationDisk3;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set actuationDisk3;
+        }
+    }
+
+
+    // actuationDisk2
+/*    {
+        name    actuationDisk2;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        {
+            box (581754 4785658 1065) (581754.4 4785668 1075);
+        }
+    }
+    {
+        name    actuationDisk2;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set actuationDisk3;
+        }
+    }
+*/
+);
+
+// ************************************************************************* //
